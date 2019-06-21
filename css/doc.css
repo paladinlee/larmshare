@@ -1,0 +1,27 @@
+﻿body {
+}
+
+.content
+{
+    font-family:Arial;
+    font-size:12px;
+}
+
+.doc_table
+{
+    border-collapse:collapse;
+    border:1px solid black;
+    width:100%;
+    font-family:Arial;
+    font-size:12px;
+}
+.doc_table th
+{
+    border:1px solid black;
+    color:Blue;
+}
+
+.doc_table td
+{
+    border:1px solid black;
+}
