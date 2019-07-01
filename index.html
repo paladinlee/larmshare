@@ -82,7 +82,7 @@
 
             //update cookie
             $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
-            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 7 });     
+            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 30 });     
             
             
             console.log('cookie',$.cookie('larm_records_cookie'));
@@ -179,7 +179,7 @@
             console.log('arrayRecordTime delete after',arrayRecordTime);
             
             //update cookie
-            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 7 });
+            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 30 });
         }
 
         function DoLamAdd()
@@ -196,10 +196,10 @@
             $("#tbxTargetURL").val(vLink);
 
             //update cookie
-            $.cookie('larm_play_cookie', vLink, { expires: 7 });
+            $.cookie('larm_play_cookie', vLink, { expires: 30 });
 
-            $.cookie('larm_LarmNum_cookie', vBook, { expires: 7 });
-            $.cookie('larm_LarmAB_cookie', vAB, { expires: 7 });
+            $.cookie('larm_LarmNum_cookie', vBook, { expires: 30 });
+            $.cookie('larm_LarmAB_cookie', vAB, { expires: 30 });
         }
 
         function DoLamRead() {
@@ -214,8 +214,8 @@
             window.open(vLink, "_blank");
 
             //update cookie
-            $.cookie('larm_LarmNum_cookie', vBook, { expires: 7 });
-            $.cookie('larm_LarmAB_cookie', vAB, { expires: 7 });
+            $.cookie('larm_LarmNum_cookie', vBook, { expires: 30 });
+            $.cookie('larm_LarmAB_cookie', vAB, { expires: 30 });
         }
 
         function DoNSLAdd()
@@ -234,9 +234,9 @@
             $("#tbxTargetURL").val(vLink);
 
             //update cookie
-            $.cookie('larm_play_cookie', vLink, { expires: 7 });        
-            $.cookie('larm_NSLNum_cookie', vBook, { expires: 7 });
-            $.cookie('larm_NSLAB_cookie', vAB, { expires: 7 });                
+            $.cookie('larm_play_cookie', vLink, { expires: 30 });        
+            $.cookie('larm_NSLNum_cookie', vBook, { expires: 30 });
+            $.cookie('larm_NSLAB_cookie', vAB, { expires: 30 });                
         }
 
         function DoNSLRead()
@@ -255,8 +255,8 @@
             window.open(vLink, "_blank");
 
             //update cookie
-            $.cookie('larm_NSLNum_cookie', vBook, { expires: 7 });
-            $.cookie('larm_NSLAB_cookie', vAB, { expires: 7 });                
+            $.cookie('larm_NSLNum_cookie', vBook, { expires: 30 });
+            $.cookie('larm_NSLAB_cookie', vAB, { expires: 30 });                
         }
 
         function DoDailyAdd()
@@ -265,9 +265,9 @@
             $("#tbxTargetURL").val(vLink);
 
             //update cookie
-            $.cookie('larm_play_cookie', vLink, { expires: 7 });
+            $.cookie('larm_play_cookie', vLink, { expires: 30 });
 
-            $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 7 });
+            $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 30 });
             
 
         }
@@ -279,7 +279,7 @@
             window.open(vURL, "_blank");
 
             //update cookie
-            $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 7 });
+            $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 30 });
         }        
 
         function DoLarmRead()
@@ -298,7 +298,7 @@
             window.open(vPage,"_blank");
 
             //update cookie
-            $.cookie('larm_LarmRead_cookie', vUserInput, { expires: 7 });
+            $.cookie('larm_LarmRead_cookie', vUserInput, { expires: 30 });
         }
 
         $(function () {
