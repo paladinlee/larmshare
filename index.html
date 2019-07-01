@@ -38,10 +38,12 @@
         }
     </style>
     <script src="./jquery/jquery.min.js"></script>
+    <script src="./jquery/jquery.cookie.js"></script>
     <script src="./Scripts/fullLarmData.js"></script>
 
     <title></title>
     <script>
+        var arrayRecordTime=new Array();
         var vDailyLamID = arrayDailyLamID;
         var vDailyLamFile = arrayDailyLamFile;
         function DoPaly()
@@ -70,10 +72,45 @@
             var audio = document.getElementById("MyAudio");
             var vCurrentTime = new Number(audio.currentTime);
 
+            arrayRecordTime.push(vCurrentTime);
+
             var vAppend = "<a class='append_a t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:SetTime(" + vCurrentTime.toFixed(2) + ")'>" + formatSecond(vCurrentTime) + "</a><a class='append_d t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:DoDelete(\"t_" + vCurrentTime.toString().replace(".", "_") + "\")' title='刪除'><span style='color:red' class='glyphicon glyphicon-trash'> </span></a>";
             $("#RecordList").append(vAppend);
             //console.log('curren time', audio.currentTime);
             
+            console.log('Now arrayRecordTime:',arrayRecordTime)
+
+            //update cookie
+            $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
+            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 7 });     
+            
+            
+            console.log('cookie',$.cookie('larm_records_cookie'));
+            
+        }
+
+        function AppendTimePoint(vTime){
+            var vCurrentTime = new Number(vTime);
+            var vAppend = "<a class='append_a t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:SetTime(" + vCurrentTime.toFixed(2) + ")'>" + formatSecond(vCurrentTime) + "</a><a class='append_d t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:DoDelete(\"t_" + vCurrentTime.toString().replace(".", "_") + "\")' title='刪除'><span style='color:red' class='glyphicon glyphicon-trash'> </span></a>";
+            $("#RecordList").append(vAppend);            
+        }
+    
+
+        function CookieToRecord(){
+            var arrayCookie=new Array();
+            arrayCookie=$.cookie('larm_records_cookie').split(',');
+
+            arrayCookie.forEach(function(vTime)
+            {
+                AppendTimePoint(vTime);
+            });
+
+            arrayRecordTime=arrayCookie;
+
+
+            //refresh Target URL
+            $("#tbxTargetURL").val($.cookie('larm_play_cookie'));                  
+
         }
 
         function SetTime(vTime) {
@@ -101,6 +138,15 @@
                 return false;
 
             $("." + vClass).remove();
+
+            vOriTime=vClass.split('t_')[1].replace("_",".");
+
+            console.log('arrayRecordTime delete before',arrayRecordTime);
+            arrayRecordTime.splice( arrayRecordTime.indexOf(vOriTime), 1 );        
+            console.log('arrayRecordTime delete after',arrayRecordTime);
+            
+            //update cookie
+            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 7 });
         }
 
         function DoLamAdd()
@@ -115,6 +161,9 @@
             }
             var vLink = "https://theqi.com/buddhism/GL1/audio/" + vBook + vAB.toUpperCase() + ".MP3";
             $("#tbxTargetURL").val(vLink);
+
+            //update cookie
+            $.cookie('larm_play_cookie', vLink, { expires: 7 });
         }
 
         function DoLamRead() {
@@ -143,6 +192,9 @@
             }
             var vLink = "https://www.theqi.com/buddhism/NSL/NSL_" + vBook + vAB.toUpperCase() + ".mp3";
             $("#tbxTargetURL").val(vLink);
+
+            //update cookie
+            $.cookie('larm_play_cookie', vLink, { expires: 7 });            
         }
 
         function DoNSLRead()
@@ -166,7 +218,18 @@
             var vLink = $("select option:selected").val();            
             $("#tbxTargetURL").val(vLink);
 
+            //update cookie
+            $.cookie('larm_play_cookie', vLink, { expires: 7 });
+
         }
+
+        function DoDailyRead()
+        {
+            var vID = $("select option:selected").text();     
+            var vURL=dict_url[vID];
+            window.open(vURL, "_blank");
+
+        }        
 
         function DoLarmRead()
         {
@@ -190,6 +253,8 @@
             {
                 $("#sel1").append($("<option></option>").attr("value", vDailyLamFile[i]).text(vDailyLamID[i]));
             }
+            
+            CookieToRecord();
 
         });
     </script>
@@ -278,7 +343,8 @@
         <div class="col-md-6">
             <div class="input-group">
                 <span >
-                    <input type="button" value="加入" id="btnDailyAdd" class="btn btn-primary form-control" onclick="DoDailyAdd()"  />                     
+                    <input type="button" value="加入" id="btnDailyAdd" class="btn btn-primary" onclick="DoDailyAdd()"  />  
+                    <input type="button" value="閱讀" id="btnDailyRead" class="btn btn-primary" onclick="DoDailyRead()"  />                    
                 </span>
                 
                    
@@ -298,7 +364,7 @@
                  <div class="input-group">                        
                      <span >
                          
-                         <input type="button" value="開啟" id="btnLarmRead" class="btn btn-primary form-control" onclick="DoLarmRead()"  />                     
+                         <input type="button" value="開啟" id="btnLarmRead" class="btn btn-primary " onclick="DoLarmRead()"  />                     
                      </span>
                      
                         
@@ -316,7 +382,7 @@
     </div>
         <br />
     <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
-        <input type="button" value="播放" id="btnPlay" class="btn btn-primary" onclick="DoPaly()"  />        
+        <input type="button" value="下載" id="btnPlay" class="btn btn-primary" onclick="DoPaly()"  />        
     </div>
     <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
         <input type="button" value="記憶" id="btnRecord" class="btn btn-danger" onclick="DoRecord()"  />        
