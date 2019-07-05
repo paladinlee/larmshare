@@ -291,11 +291,16 @@
                 return;
             }
 
+            /*
             var iNum=parseInt(vUserInput);
             var iPageNum=iNum+22;
             var vTmp="0000"+iPageNum.toString();
             var vPage="https://raw.githubusercontent.com/paladinlee/larmimg/master/page"+vTmp.substr(vTmp.length-4,4)+".jpg";
+            */
+            var vPage="larmbook.html?num="+vUserInput;
+
             window.open(vPage,"_blank");
+
 
             //update cookie
             $.cookie('larm_LarmRead_cookie', vUserInput, { expires: 30 });

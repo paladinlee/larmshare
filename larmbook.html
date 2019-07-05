@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./img/favicon-mc.ico">
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />    
+
+    <!-- Custom styles for this template -->
+    <link href="./css/sticky-footer.css" rel="stylesheet" />            
+    
+    <link href="./css/starter-template.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../Scripts/ie8-responsive-file-warning.js"></script>    
+    <![endif]-->
+    <script src="./Scripts/ie-emulation-modes-warning.js"></script>
+    
+    
+    <!--[if lt IE 9]>
+    <script src="../Scripts/html5shiv.min.js"></script>
+    <script src="../Scripts/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .append_a {
+            padding-right:5px;
+            padding-left: 15px;
+        }
+
+        .append_d {
+            padding-right:20px;
+        }
+
+        #imgBook{
+            margin-top: -60px;
+            
+        }
+
+        .functionbar{
+            position:absolute;
+            z-index: 10;
+        }
+
+        .pic{
+            position:absolute;
+            z-index: 1;
+        }
+    </style>
+    <script src="./jquery/jquery.min.js"></script>
+    <script src="./jquery/jquery.cookie.js"></script>
+    <script src="./jquery/jquery.url.js"></script>
+
+
+    <title></title>
+    <script>
+        var vNowPage=-1;
+        function GetBookUrlFromNum(vUserInput)
+        {
+            var iNum=parseInt(vUserInput);
+            var iPageNum=iNum+22;
+            var vTmp="0000"+iPageNum.toString();
+            var vPage="https://raw.githubusercontent.com/paladinlee/larmimg/master/page"+vTmp.substr(vTmp.length-4,4)+".jpg";
+            return vPage;
+        }
+    
+        function DoPre()
+        {
+            if(vNowPage>1)
+            {
+                vNowPage=parseInt(vNowPage)-1;
+                $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));                
+            }
+        }
+
+        function DoNext()
+        {
+            if(vNowPage<=636)
+            {
+                vNowPage=parseInt(vNowPage)+1;
+                $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));                  
+            }
+        }
+
+        function DoJump()
+        {            
+            var vUserInput=$.trim($("#tbxJumpNum").val());
+
+            
+            if(isNaN(vUserInput))
+            {
+                alert('請輸入正確的頁數');
+                return;
+            }
+
+            vNowPage=parseInt(vUserInput);
+            $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));  
+        }
+
+        $(function(){
+            var vBookNum= $.url.param("num");           
+            if(vBookNum!='')
+            {                
+                vNowPage=vBookNum;
+                $("#imgBook").attr("src",GetBookUrlFromNum(vBookNum));                
+            }
+            else
+            {
+                vNowPage=0;
+                $("#imgBook").attr("src","https://raw.githubusercontent.com/paladinlee/larmimg/master/page0001.jpg");                
+            }
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="container">     
+        <div class="row functionbar ">
+                <div class="col-md-12">
+                        <div class=" text-center">
+                                <span >
+                                    <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
+                                    <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
+                                                 &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="text" id="tbxJumpNum" style="width: 100px" >
+                                    <input type="button" value="跳頁" id="btnNext" class="btn btn-primary " onclick="DoJump()"  /> 
+                                </span>
+                                   
+                            </div>    
+                </div>                
+        </div>      
+        <div class="row pic">
+                <div class="col-md-12">
+                        <div >
+                             <img id="imgBook" src="">  
+                                   
+                        </div>    
+                </div>
+        </div>            
+    </form>
+</body>
+</html>
