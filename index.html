@@ -40,7 +40,8 @@
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
     <script src="./Scripts/fullLarmData.js"></script>
-
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143327354-1"></script>
     <title></title>
     <script>
         var arrayRecordTime=new Array();
@@ -322,6 +323,12 @@
             CookieToRecord();
 
         });
+
+        //google GA
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-143327354-1');        
     </script>
 </head>
 <body>
