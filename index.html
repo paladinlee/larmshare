@@ -132,6 +132,9 @@
             
             //Refresh 廣論原文頁數
             $("#tbxPageNum").val($.cookie('larm_LarmRead_cookie'));
+
+            //Refresh 備覽原文頁數
+            $("tbxNanPageNum").val($.cookie('nan_LarmRead_cookie'));
             
             //Refrsh 廣論手抄頁數
             $("#tbxBook").val($.cookie('larm_LarmNum_cookie'));
@@ -307,6 +310,24 @@
             $.cookie('larm_LarmRead_cookie', vUserInput, { expires: 30 });
         }
 
+        function DoNanRead()
+        {
+            var vUserInput=$.trim($("#tbxNanPageNum").val());
+            if(isNaN(vUserInput))
+            {
+                alert('請輸入正確的頁數');
+                return;
+            }
+
+            var vPage="nanbook.html?num="+vUserInput;
+
+            window.open(vPage,"_blank");
+
+
+            //update cookie
+            $.cookie('nan_LarmRead_cookie', vUserInput, { expires: 30 });            
+        }
+
         $(function () {
             for (var i = 0; i < vDailyLamID.length; i++)
             {
@@ -444,6 +465,26 @@
              </div>
          </div>    
         <br />
+        <div class="row">
+            <div class="col-md-6">
+                 <div class="input-group">
+                   <span class="input-group-addon">備覽頁數</span>
+                   <input type="text" id="tbxNanPageNum" class="form-control">        
+                   </select>
+                 </div> 
+            </div>
+             <div class="col-md-6">
+                 <div class="input-group">                        
+                     <span >
+                         
+                         <input type="button" value="閱讀" id="btnNanRead" class="btn btn-primary " onclick="DoNanRead()"  />                     
+                     </span>
+                     
+                        
+                 </div>
+             </div>
+         </div>   
+         <br/>        
     <div class="row">
         <div class="col-md-12">
              <div class="input-group">
