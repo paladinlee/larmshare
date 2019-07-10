@@ -37,9 +37,16 @@
             padding-right:20px;
         }
 
-        .row {
+        .row_multi {
             line-height: 50px !important;
         }
+
+        .input-group-btn, .input-group .form-control
+        {
+        height: auto;
+        min-height: 30px;
+        }
+
     </style>
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
@@ -359,7 +366,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="container">  
-    <div class="row">
+    <div class="row row_query">
     <script>
       (function() {
         var cx = '002047481276774726341:uqalit40df4';
@@ -374,7 +381,7 @@
     <gcse:search></gcse:search>
     </div>  
 
-    <div class="row">
+    <div class="row row_multi">
         <div class="col-md-4">
             <div class="input-group">
                 <span class="input-group-addon">【廣論】冊</span>
@@ -401,7 +408,7 @@
         </div>
     </div>        
         <br />
-<div class="row">
+<div class="row row_multi">
         <div class="col-md-4">
             <div class="input-group">
                 <span class="input-group-addon">【備覽】冊</span>
@@ -429,7 +436,7 @@
     </div>            
         <br />
 
-    <div class="row">
+    <div class="row row_multi">
        <div class="col-md-6">
             <div class="input-group">
               <span class="input-group-addon">全廣 II</span>
@@ -449,7 +456,7 @@
         </div>
     </div>
         <br />
-        <div class="row">
+        <div class="row row_multi">
             <div class="col-md-6">
                  <div class="input-group">
                    <span class="input-group-addon">廣論頁數</span>
@@ -469,7 +476,7 @@
              </div>
          </div>    
         <br />
-        <div class="row">
+        <div class="row row_multi">
             <div class="col-md-6">
                  <div class="input-group">
                    <span class="input-group-addon">備覽頁數</span>
@@ -510,7 +517,7 @@
     <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
         <span id="RecordList"></span>       
     </div>
-    <div class="row">
+    <div class="row row_multi">
         <div class="col-md-12">
             <audio id="MyAudio" controls class="form-control">              
               <source id="MySource" src="" type="audio/mpeg">
@@ -520,7 +527,7 @@
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row row_multi">
             <div class="col-md-4">
                <a href="https://paladinlee.gitbook.io/larms/" target="_blank">【使用說明】</a>          
             </div>
