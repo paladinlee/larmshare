@@ -45,7 +45,7 @@
         .functionbar{
             position:absolute;
             z-index: 10;
-            width: 100%;
+            /*width: 100%;*/
         }
 
         .pic{
@@ -167,18 +167,19 @@
 <body>
     <form id="form1" runat="server">
     <div class="container">     
-        <div class=" functionbar ">
-                <div class="col-md-12">
-                        <div class=" text-center">
-                               
-                                    <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
-                                    <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
-                                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="text" id="tbxJumpNum" style="width: 50px" >
-                                    <input type="button" value="跳頁" id="btnNext" class="btn btn-primary " onclick="DoJump()"  /> 
-                                    <a href="#" id="hyBack"></a>                                   
-                        </div>    
-                </div>     
+        <div class=" functionbar btn-toolbar" role="toolbar">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
+                        <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        <input type="text" id="tbxJumpNum" style="width: 50px" >
+                        <input type="button" value="跳頁" id="btnNext" class="btn btn-primary " onclick="DoJump()"  />
+                </div>
+                <div class="btn-group" role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
+                <div class="col-md-2">                        
+                </div>               
+               
                   
         </div>      
         <div class="row pic">
