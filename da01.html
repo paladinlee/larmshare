@@ -42,6 +42,10 @@
             
         }
 
+        #tbxJumpNum {
+            width: 50px;
+        }
+
         .functionbar{
             position:absolute;
             z-index: 10;
@@ -167,18 +171,20 @@
 <body>
     <form id="form1" runat="server">
     <div class="container">     
-        <div class=" functionbar btn-toolbar" role="toolbar">
+        <div class="btn-toolbar mb-12 functionbar" role="toolbar">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                         <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
                         <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <input type="text" id="tbxJumpNum" style="width: 50px" >
-                        <input type="button" value="跳頁" id="btnNext" class="btn btn-primary " onclick="DoJump()"  />
-                </div>
-                <div class="btn-group" role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
-                <div class="col-md-2">                        
+                    <div class="input-group">                        
+                        <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
+                    </div>
+                        <button id="btnNext" type="button" class="btn btn-primary" onclick="DoJump()" >跳頁</button>
+                    
                 </div>               
+                <div class="btn-group " role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
+                       
                
                   
         </div>      
