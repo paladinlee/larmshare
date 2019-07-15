@@ -50,12 +50,15 @@
             position:absolute;
             z-index: 10;
             /*width: 100%;*/
+            box-sizing: border-box;
         }
 
         .pic{
             position:absolute;
             z-index: 1;
         }
+
+
     </style>
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
@@ -171,7 +174,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="container">     
-        <div class="btn-toolbar mb-12 functionbar" role="toolbar">
+        <div class="btn-toolbar mb-12 functionbar " role="toolbar">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                         <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
                         <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
