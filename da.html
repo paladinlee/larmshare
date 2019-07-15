@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./img/favicon-mc.ico">
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />    
+
+    <!-- Custom styles for this template -->
+    <link href="./css/sticky-footer.css" rel="stylesheet" />            
+    
+    <link href="./css/starter-template.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../Scripts/ie8-responsive-file-warning.js"></script>    
+    <![endif]-->
+    <script src="./Scripts/ie-emulation-modes-warning.js"></script>
+    
+    
+    <!--[if lt IE 9]>
+    <script src="../Scripts/html5shiv.min.js"></script>
+    <script src="../Scripts/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .append_a {
+            padding-right:5px;
+            padding-left: 15px;
+        }
+
+        .append_d {
+            padding-right:20px;
+        }
+
+        .row_multi {
+            line-height: 50px !important;
+        }
+    
+
+    </style>
+    <script src="./jquery/jquery.min.js"></script>
+    <script src="./jquery/jquery.cookie.js"></script>
+    <script src="./Scripts/fullLarmData.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143327354-1"></script>
+    <title>大般若經</title>
+    <script>
+
+
+        function CookieToRecord(){
+            
+            //Refresh 廣論原文頁數
+            $("#tbxOneNum").val($.cookie('da01_cookie'));
+
+        }
+
+
+        function DoOneRead()
+        {
+            var vUserInput=$.trim($("#tbxOneNum").val());
+            if(isNaN(vUserInput))
+            {
+                alert('請輸入正確的頁數');
+                return;
+            }
+
+            /*
+            var iNum=parseInt(vUserInput);
+            var iPageNum=iNum+22;
+            var vTmp="0000"+iPageNum.toString();
+            var vPage="https://raw.githubusercontent.com/paladinlee/larmimg/master/page"+vTmp.substr(vTmp.length-4,4)+".jpg";
+            */
+            var vPage="da01.html?num="+vUserInput;
+
+            window.open(vPage,"_blank");
+
+
+            //update cookie
+            $.cookie('da01_cookie', vUserInput, { expires: 30 });
+        }
+
+      
+
+        $(function () {  
+            
+            CookieToRecord();
+
+        });
+
+        //google GA
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-143327354-1');        
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="container">     
+
+
+        <div class="row row_multi">
+            <div class="col-md-4">
+               <a href="https://github.com/paladinlee/daborejing/raw/master/ReadBegin/%E8%AA%A6%E7%B6%93%E5%84%80%E8%BB%8C-%E5%AF%A9%E6%A0%B8%E7%89%88-1.jpg" target="_blank">【誦經儀軌】</a>          
+            </div>
+            <div class="col-md-4">
+                      
+            </div>            
+            <div class="col-md-4">
+                      
+        </div>                        
+        </div>  
+        <div class="row row_multi">
+            <div class="col-md-6">
+                 <div class="input-group">
+                   <span class="input-group-addon">第二會第一冊頁數</span>
+                   <input type="text" id="tbxOneNum" class="form-control">        
+                   </select>
+                 </div> 
+            </div>
+             <div class="col-md-6">
+                 <div class="input-group">                        
+                     <span >
+                         
+                         <input type="button" value="閱讀" id="btnLarmRead" class="btn btn-primary " onclick="DoOneRead()"  />                     
+                     </span>
+                     
+                        
+                 </div>
+             </div>
+         </div>    
+        <br />
+
+    <br>
+    <br>
+        
+    </div>
+    </form>
+</body>
+</html>
