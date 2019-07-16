@@ -113,10 +113,6 @@
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));       
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });    
                 window.opener.location.reload(false);  
-
-                /*move window to right*/
-                var leftPos = $('#imgBook').scrollLeft();
-                $('html,body').animate({ scrollLeft: leftPos+400 }, 'slow');             
               
             }
         }
@@ -193,11 +189,7 @@
     <form id="form1" runat="server">
     <div class="container">     
         <div class="btn-toolbar mb-12 functionbar " role="toolbar">
-            <!--
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
-                        <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
-                </div>-->
+           
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="input-group">                        
                         <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
@@ -216,7 +208,7 @@
                         <tr>
                             <td style="padding: 40px">&nbsp;</td>
                             <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下<br><br><br>一<br><br><br>頁</div> </td>
-                            <td><img id="imgBook" src=""> </td>
+                            <td><div class="divBook"><img id="imgBook" src=""></div> </td>
                             <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上<br><br><br>一<br><br><br>頁</div></td>
                             <td style="padding: 40px">&nbsp;</td>
                         </tr>
