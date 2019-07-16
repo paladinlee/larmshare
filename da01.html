@@ -57,7 +57,10 @@
             z-index: 1;
         }
 
-
+        .spFunction
+        {
+            padding: 10px;
+        }
 
     </style>
     <script src="./jquery/jquery.min.js"></script>
@@ -80,12 +83,13 @@
     
         function ProcessPreDownload()
         {
+            /*
             //imgHide
             if(vNowPage>=1 && vNowPage<688)
             {
                 var vNext=vNowPage+1;
                 $("#imgHide").attr("src",GetBookUrlFromNum(vNext));    
-            }
+            }*/
         }
         
         function DoPre()
@@ -177,7 +181,7 @@
                 $("#imgBook").attr("src","https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%B8%80%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%B8%80%E5%86%8A-001.jpg");                
             }
 
-            $(".pic span").delay(1000).fadeIn( 400 );
+            $(".spFunction").delay(1200).fadeIn( 400 );
         });
         //google GA
         window.dataLayer = window.dataLayer || [];
@@ -210,9 +214,9 @@
             <table>
                     <tbody>
                         <tr>
-                            <td ><span style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
+                            <td ><span class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
                             <td><img id="imgBook" src=""> </td>
-                            <td ><span style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
+                            <td ><span class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
                         </tr>
                     </tbody>
             </table>               
