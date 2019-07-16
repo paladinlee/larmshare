@@ -42,6 +42,12 @@
             
         }
 
+        .input-group-btn, .input-group .form-control
+        {
+        height: auto;
+        min-height: 46px;
+        }        
+
         #tbxJumpNum {
             width: 60px;
         }
@@ -192,7 +198,7 @@
                     <div class="input-group">                        
                         <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
                     </div>
-                        <button id="btnNext" type="button" class="btn btn-primary" onclick="DoJump()" >跳頁</button>
+                        <button id="btnNext" type="button" class="btn btn-primary btn-lg" onclick="DoJump()" >跳頁</button>
                     
                 </div>               
                 <div class="btn-group " role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
