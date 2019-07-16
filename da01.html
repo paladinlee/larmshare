@@ -78,6 +78,16 @@
             return vPage;
         }
     
+        function ProcessPreDownload()
+        {
+            //imgHide
+            if(vNowPage>=1 && vNowPage<688)
+            {
+                var vNext=vNowPage+1;
+                $("#imgHide").attr("src",GetBookUrlFromNum(vNext));    
+            }
+        }
+        
         function DoPre()
         {
             if(vNowPage>1)
@@ -86,7 +96,9 @@
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));        
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });       
-                window.opener.location.reload(false);    
+                window.opener.location.reload(false);  
+
+                ProcessPreDownload();  
             }
         }
 
@@ -100,6 +112,7 @@
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });    
                 window.opener.location.reload(false);
                 
+                ProcessPreDownload();
             }
         }
 
@@ -117,6 +130,8 @@
             vNowPage=parseInt(vUserInput);                             
 
             $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));  
+
+            ProcessPreDownload();
 
             MakeHyBack();
         }
@@ -154,7 +169,7 @@
             if(vBookNum!='')
             {                
                 vNowPage=vBookNum;                
-                $("#imgBook").attr("src",GetBookUrlFromNum(vBookNum));                
+                $("#imgBook").attr("src",GetBookUrlFromNum(vBookNum));                                
             }
             else
             {
@@ -162,7 +177,7 @@
                 $("#imgBook").attr("src","https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%B8%80%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%B8%80%E5%86%8A-001.jpg");                
             }
 
-
+            $(".pic span").delay(1000).fadeIn( 400 );
         });
         //google GA
         window.dataLayer = window.dataLayer || [];
@@ -192,13 +207,17 @@
                   
         </div>      
         <div class="row pic">
-                <div class="col-md-12">
-                        <div >
-                             <img id="imgBook" src="">  
-                                   
-                        </div>    
-                </div>
-        </div>            
+            <table>
+                    <tbody>
+                        <tr>
+                            <td ><span style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
+                            <td><img id="imgBook" src=""> </td>
+                            <td ><span style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
+                        </tr>
+                    </tbody>
+            </table>               
+        </div>  
+        <img id="imgHide" src="" style="display: none">          
     </form>
 </body>
 </html>
