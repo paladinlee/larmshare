@@ -56,6 +56,7 @@
             
             //Refresh 廣論原文頁數
             $("#tbxOneNum").val($.cookie('da01_cookie'));
+            $("#tbxSecondNum").val($.cookie('da02_cookie'));
 
         }
 
@@ -84,6 +85,29 @@
             $.cookie('da01_cookie', vUserInput, { expires: 30 });
         }
 
+        function DoSecondRead()
+        {
+            var vUserInput=$.trim($("#tbxSecondNum").val());
+            if(isNaN(vUserInput))
+            {
+                alert('請輸入正確的頁數');
+                return;
+            }
+
+            /*
+            var iNum=parseInt(vUserInput);
+            var iPageNum=iNum+22;
+            var vTmp="0000"+iPageNum.toString();
+            var vPage="https://raw.githubusercontent.com/paladinlee/larmimg/master/page"+vTmp.substr(vTmp.length-4,4)+".jpg";
+            */
+            var vPage="da02.html?num="+vUserInput;
+
+            window.open(vPage,"_blank");
+
+
+            //update cookie
+            $.cookie('da02_cookie', vUserInput, { expires: 30 });
+        }
       
 
         $(function () {  
@@ -119,7 +143,7 @@
             <div class="col-md-6">
                  <div class="input-group">
                    <span class="input-group-addon">第二會第一冊頁數</span>
-                   <input type="text" id="tbxOneNum" class="form-control">        
+                   <input type="text" id="tbxOneNum" class="form-control" placeholder="1~670">        
                    </select>
                  </div> 
             </div>
@@ -135,7 +159,26 @@
              </div>
          </div>    
         <br />
-
+        <div class="row row_multi">
+            <div class="col-md-6">
+                 <div class="input-group">
+                   <span class="input-group-addon">第二會第二冊頁數</span>
+                   <input type="text" id="tbxSecondNum" class="form-control" placeholder="671~1314">        
+                   </select>
+                 </div> 
+            </div>
+             <div class="col-md-6">
+                 <div class="input-group">                        
+                     <span >
+                         
+                         <input type="button" value="閱讀" id="btnLarmRead" class="btn btn-primary " onclick="DoSecondRead()"  />                     
+                     </span>
+                     
+                        
+                 </div>
+             </div>
+         </div> 
+         <br/>
     <br>
     <br>
         
