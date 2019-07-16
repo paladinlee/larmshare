@@ -112,7 +112,11 @@
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));       
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });    
-                window.opener.location.reload(false);               
+                window.opener.location.reload(false);  
+
+                /*move window to right*/
+                var leftPos = $('#imgBook').scrollLeft();
+                $('html,body').animate({ scrollLeft: leftPos+400 }, 'slow');             
               
             }
         }
