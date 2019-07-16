@@ -43,7 +43,7 @@
         }
 
         #tbxJumpNum {
-            width: 50px;
+            width: 60px;
         }
 
         .functionbar{
@@ -57,7 +57,13 @@
             z-index: 1;
         }
 
-
+        .spFunction      
+        {
+            background-color:darkgrey;
+            padding: 5px;
+            font-weight: bold;
+        }
+    
 
     </style>
     <script src="./jquery/jquery.min.js"></script>
@@ -78,16 +84,7 @@
             return vPage;
         }
     
-        function ProcessPreDownload()
-        {
-           
-            //imgHide
-            if(vNowPage>=1 && vNowPage<688)
-            {
-                var vNext=vNowPage+1;
-                $("#imgHide").attr("src",GetBookUrlFromNum(vNext));    
-            }
-        }
+
         
         function DoPre()
         {
@@ -97,9 +94,7 @@
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));        
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });       
-                window.opener.location.reload(false);  
-
-                ProcessPreDownload();  
+                window.opener.location.reload(false);                
             }
         }
 
@@ -111,9 +106,8 @@
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));       
                 $.cookie('da01_cookie', vNowPage, { expires: 30 });    
-                window.opener.location.reload(false);
-                
-                ProcessPreDownload();
+                window.opener.location.reload(false);               
+              
             }
         }
 
@@ -130,9 +124,7 @@
 
             vNowPage=parseInt(vUserInput);                             
 
-            $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));  
-
-            ProcessPreDownload();
+            $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));            
 
             MakeHyBack();
         }
@@ -191,10 +183,11 @@
     <form id="form1" runat="server">
     <div class="container">     
         <div class="btn-toolbar mb-12 functionbar " role="toolbar">
+            <!--
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                         <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
                         <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
-                </div>
+                </div>-->
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="input-group">                        
                         <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
@@ -211,16 +204,16 @@
             <table>
                     <tbody>
                         <tr>
-                            <td style="padding: 20px">&nbsp;</td>
-                            <td ><span class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
+                            <td style="padding: 40px">&nbsp;</td>
+                            <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下<br><br><br>一<br><br><br>頁</div> </td>
                             <td><img id="imgBook" src=""> </td>
-                            <td ><span class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>一&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>頁</span></td>
-                            <td style="padding: 20px">&nbsp;</td>
+                            <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上<br><br><br>一<br><br><br>頁</div></td>
+                            <td style="padding: 40px">&nbsp;</td>
                         </tr>
                     </tbody>
             </table>               
         </div>  
-        <img id="imgHide" src="" style="width: 10px; height: 10px;">          
+             
     </form>
 </body>
 </html>
