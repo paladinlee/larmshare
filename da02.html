@@ -42,6 +42,12 @@
             
         }
 
+        .input-group-btn, .input-group .form-control
+        {
+        height: auto;
+        min-height: 46px;
+        }
+
         #tbxJumpNum {
             width: 60px;
         }
@@ -50,6 +56,13 @@
             position:absolute;
             z-index: 10;
             /*width: 100%;*/            
+        }
+
+        .spFunction
+        {
+            background-color:darkgrey;
+            padding: 15px;
+            font-weight: bold;
         }
 
         .pic{
@@ -164,6 +177,8 @@
                 $("#imgBook").attr("src","https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%BA%8C%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E4%BA%8C%E5%86%8A-001.jpg");                
             }
 
+            $(".spFunction").delay(1200).fadeIn( 400 );
+
 
         });
         //google GA
@@ -177,15 +192,11 @@
     <form id="form1" runat="server">
     <div class="container">     
         <div class="btn-toolbar mb-12 functionbar " role="toolbar">
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <input type="button" value="上一頁" id="btnPre" class="btn btn-primary " onclick="DoPre()"  /> 
-                        <input type="button" value="下一頁" id="btnNext" class="btn btn-primary " onclick="DoNext()"  /> 
-                </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <div class="input-group">                        
                         <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
                     </div>
-                        <button id="btnNext" type="button" class="btn btn-primary" onclick="DoJump()" >跳頁</button>
+                        <button id="btnNext" type="button" class="btn btn-primary btn-lg" onclick="DoJump()" >跳頁</button>
                     
                 </div>               
                 <div class="btn-group " role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
@@ -194,12 +205,17 @@
                   
         </div>      
         <div class="row pic">
-                <div class="col-md-12">
-                        <div >
-                             <img id="imgBook" src="">  
-                                   
-                        </div>    
-                </div>
+                <table>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 40px">&nbsp;</td>
+                                <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下<br><br><br>一<br><br><br>頁</div> </td>
+                                <td><div class="divBook"><img id="imgBook" src=""></div> </td>
+                                <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上<br><br><br>一<br><br><br>頁</div></td>
+                                <td style="padding: 40px">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                </table>
         </div>            
     </form>
 </body>
