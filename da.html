@@ -59,6 +59,7 @@
             $("#tbxSecondNum").val($.cookie('da02_cookie'));
             $("#tbxThirdNum").val($.cookie('da03_cookie'));
             $("#tbxFourthNum").val($.cookie('da04_cookie'));
+            $("#tbxFifthNum").val($.cookie('da05_cookie'));
 
         }
 
@@ -146,6 +147,24 @@
             //update cookie
             $.cookie('da04_cookie', vUserInput, { expires: 30 });
         }        
+
+        function DoFifthRead()
+        {
+            var vUserInput=$.trim($("#tbxFifthNum").val());
+            if(isNaN(vUserInput))
+            {
+                alert('請輸入正確的頁數');
+                return;
+            }
+
+            var vPage="da05.html?num="+vUserInput;
+
+            window.open(vPage,"_blank");
+
+
+            //update cookie
+            $.cookie('da05_cookie', vUserInput, { expires: 30 });
+        }            
 
         $(function () {  
             
@@ -255,7 +274,27 @@
                  </div>
              </div>
          </div> 
-         <br/>             
+         <br/>       
+         <div class="row row_multi">
+            <div class="col-md-6">
+                 <div class="input-group">
+                   <span class="input-group-addon">第二會第五冊頁數</span>
+                   <input type="text" id="tbxFifthNum" class="form-control" placeholder="2595~3286">        
+                   </select>
+                 </div> 
+            </div>
+             <div class="col-md-6">
+                 <div class="input-group">                        
+                     <span >
+                         
+                         <input type="button" value="閱讀" id="btnLarmRead" class="btn btn-primary " onclick="DoFifthRead()"  />                     
+                     </span>
+                     
+                        
+                 </div>
+             </div>
+         </div> 
+         <br/>                  
     <br>
     <br>
         
