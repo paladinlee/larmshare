@@ -117,24 +117,24 @@
         }
     
 
-        function CookieToRecord(){
-            var arrayCookie=new Array();
-            arrayCookie=$.cookie('larm_records_cookie').split(',');
+        function CookieToRecord(){           
 
-            console.log('Now arrayCookie:',arrayCookie);
-            console.log(arrayCookie[0]== 'null');
-
-            if(arrayCookie[0]!= 'null')
+            if($.cookie('larm_records_cookie')!=undefined)
             {
-                arrayCookie.forEach(function(vTime)
+                var arrayCookie=new Array();
+                arrayCookie=$.cookie('larm_records_cookie').split(',');
+
+                if(arrayCookie[0]!= '' && arrayCookie[0]!= 'null')
                 {
-                    AppendTimePoint(vTime);
-                });
-            
+                    arrayCookie.forEach(function(vTime)
+                    {
+                        AppendTimePoint(vTime);
+                    });
+                
 
-                arrayRecordTime=arrayCookie;
+                    arrayRecordTime=arrayCookie;
+                }
             }
-
 
             //Refresh Target URL
             $("#tbxTargetURL").val($.cookie('larm_play_cookie'));     
