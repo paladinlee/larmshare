@@ -88,7 +88,9 @@
             console.log('Now arrayRecordTime:',arrayRecordTime)
 
             //update cookie
-            $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
+            $.removeCookie('larm_records_cookie'); //改成用刪除 cookie 方式，看看手機版本會不會避免 garbage 的紀錄
+
+            //$.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
             $.cookie('larm_records_cookie', arrayRecordTime, { expires: 30 });     
             
             
@@ -103,7 +105,8 @@
                 return;
 
             $("#RecordList a").remove();
-            $.cookie('larm_records_cookie', null); 
+            $.removeCookie('larm_records_cookie'); //改成用刪除 cookie 方式，看看手機版本會不會避免 garbage 的紀錄
+            //$.cookie('larm_records_cookie', null); 
         }
 
 
