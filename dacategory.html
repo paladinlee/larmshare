@@ -38,8 +38,15 @@
                 'data' : [
                 { "id" : "a_root", "parent" : "#", "text" : "大般若波羅蜜多經 第二會 目錄" },                
                 { "id" : "a_1", "parent" : "a_root", "text" : "第一冊" },
-                { "id" : "book401", "parent" : "a_1", "text" : "卷第四百一  緣起品第一 (p3)","icon":"glyphicon glyphicon-book","url":"https://larms.azurewebsites.net/da01.html?num=3" },
-                { "id" : "book402", "parent" : "a_1", "text" : "卷第四百二  歡喜品第二 (p49)","icon":"glyphicon glyphicon-book","url":"https://www.google.com" },
+                { "id" : "book401", "parent" : "a_1", "text" : "卷第四百一  緣起品第一 (p3)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=3"} },
+                { "id" : "book402", "parent" : "a_1", "text" : "卷第四百二  歡喜品第二 (p49)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=49"} },
+                { "id" : "book402_2", "parent" : "a_1", "text" : "　　　　　  觀照品第三之一 (p81)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=81"} },
+                { "id" : "book403", "parent" : "a_1", "text" : "卷第四百三  觀照品第三之二 (p89)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=89"} },
+                { "id" : "book404", "parent" : "a_1", "text" : "卷第四百四  觀照品第三之三 (p129)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=129"} },
+                { "id" : "book405", "parent" : "a_1", "text" : "卷第四百五  觀照品第三之四 (p171)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=171"} },
+                { "id" : "book405_2", "parent" : "a_1", "text" : "　　　　　  無等等品第四 (p195)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=195"} },
+                { "id" : "book405_3", "parent" : "a_1", "text" : "　　　　　  舌根相品第五 (p203)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=203"} },
+                { "id" : "book406", "parent" : "a_1", "text" : "卷第四百六  善現品第六之一 (p209)","icon":"glyphicon glyphicon-book","a_attr":{"href":"https://larms.azurewebsites.net/da01.html?num=209"} },
                 { "id" : "a_2", "parent" : "a_root", "text" : "第二冊" },
                 ]
             },
@@ -61,15 +68,20 @@
                 "valid_children" : []
                 }
             }
-            /*,
+            ,
             "plugins" : [
-                "contextmenu", "dnd", "search",
-                "state", "types", "wholerow"
-            ]             */           
+            "themes","html_data","ui","crrm","hotkeys"
+            ]             
          }            
         ).on('loaded.jstree', function() {
             $('#jstree_demo_div').jstree('open_all');
-        });
+        })
+        .bind("select_node.jstree",function(e, data){
+            var href = data.node.a_attr.href;
+            //window.location.href = href;            
+            window.open(href, '_blank');
+        })
+        ;
         ; });
 
         $('button').on('click', function () {
