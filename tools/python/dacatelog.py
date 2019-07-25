@@ -8,7 +8,7 @@ class da:
     def mk(self):
         vTmpName=self.bookName+'　　　　　　　　'
         
-        vResult='{{ "id" : "book{}", "parent" : "a_3", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"https://larms.azurewebsites.net/da03.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
+        vResult='{{ "id" : "book{}", "parent" : "a_4", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"https://larms.azurewebsites.net/da04.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
         return vResult
 
 pList=[]
@@ -68,6 +68,7 @@ pList.append(da("432","卷第四百三十二","經文品第三十六之二","127
 pList.append(da("432-2","","隨喜回向品第三十七之一","1294"))
 '''
 #第三冊
+'''
 pList.append(da("433","卷第四百三十三","隨喜回向品第三十七之二","1315"))
 pList.append(da("434","卷第四百三十四","大師品第三十八","1353"))
 pList.append(da("434-2","","地獄品第三十九之一","1386"))
@@ -96,6 +97,38 @@ pList.append(da("446-3","","真如品第五十二之一","1864"))
 pList.append(da("447","卷第四百四十七","真如品第五十二之二","1877"))
 pList.append(da("448","卷第四百四十八","真如品第五十二之三","1917"))
 pList.append(da("448-2","","不退轉品第五十三","1930"))
+'''
+#第四冊
+pList.append(da("449","卷第四百四十九","轉不轉品第五十四","1959"))
+pList.append(da("449-2","","甚深義品第五十五之一","1992"))
+pList.append(da("450","卷第四百五十","甚深義品第五十五之二","1999"))
+pList.append(da("451","卷第四百五十一","夢行品第五十六","2035"))
+pList.append(da("451-2","","願行品第五十七","2041"))
+pList.append(da("451-3","","殑伽天品第五十八","2067"))
+pList.append(da("452","卷第四百五十二","習近品第五十九","2075"))
+pList.append(da("452-2","","增上慢品第六十之一","2103"))
+pList.append(da("453","卷第四百五十三","增上慢品第六十之二","2115"))
+pList.append(da("454","卷第四百五十四","增上慢品第六十之三","2153"))
+pList.append(da("454-2","","同學品第六十一之一","2178"))
+pList.append(da("455","卷第四百五十五","同學品第六十一之二","2193"))
+pList.append(da("455-2","","同性品第六十二之一","2214"))
+pList.append(da("456","卷第四百五十六","同性品第六十二之二 ","2233"))
+pList.append(da("456-2","","無分別品第六十三","2240"))
+pList.append(da("456-3","","堅非堅品第六十四之一 ","2265"))
+pList.append(da("457","卷第四百五十七","堅非堅品第六十四之二","2273"))
+pList.append(da("457-2","","實語品第六十五之一","2303"))
+pList.append(da("458","卷第四百五十八","實語品第六十五之二","2313"))
+pList.append(da("458-2","","無盡品第六十六","2338"))
+pList.append(da("459","卷第四百五十九","相攝品第六十七","2353"))
+pList.append(da("460","卷第四百六十","巧便品第六十八之一","2393"))
+pList.append(da("461","卷第四百六十一","巧便品第六十八之二","2435"))
+pList.append(da("462","卷第四百六十二","巧便品第六十八之三","2475"))
+pList.append(da("463","卷第四百六十三","巧便品第六十八之四","2515"))
+pList.append(da("463-2","","樹喻品第六十九","2523"))
+pList.append(da("464","卷第四百六十四","菩薩行品第七十","2553"))
+pList.append(da("464-2","","親近品第七十一","2564"))
+pList.append(da("464-3","","遍學品第七十二之一 ","2577"))
+
 
 for x in pList:
     print(x.mk())
