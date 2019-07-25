@@ -8,7 +8,7 @@ class da:
     def mk(self):
         vTmpName=self.bookName+'　　　　　　　　'
         
-        vResult='{{ "id" : "book{}", "parent" : "a_2", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"https://larms.azurewebsites.net/da02.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
+        vResult='{{ "id" : "book{}", "parent" : "a_3", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"https://larms.azurewebsites.net/da03.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
         return vResult
 
 pList=[]
@@ -67,7 +67,7 @@ pList.append(da("431","卷第四百三十一","經文品第三十六之一","123
 pList.append(da("432","卷第四百三十二","經文品第三十六之二","1275"))
 pList.append(da("432-2","","隨喜回向品第三十七之一","1294"))
 '''
-#
+#第三冊
 pList.append(da("433","卷第四百三十三","隨喜回向品第三十七之二","1315"))
 pList.append(da("434","卷第四百三十四","大師品第三十八","1353"))
 pList.append(da("434-2","","地獄品第三十九之一","1386"))
