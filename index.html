@@ -88,9 +88,9 @@
             console.log('Now arrayRecordTime:',arrayRecordTime)
 
             //update cookie
-            //$.removeCookie('larm_records_cookie'); //改成用刪除 cookie 方式，看看手機版本會不會避免 garbage 的紀錄
-
-            $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
+            //$.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
+            //改成用 DeleteOneCookie()，看看是否還會有殘留 Cookie 的現象
+            DeleteOneCookie('larm_records_cookie');
             $.cookie('larm_records_cookie', arrayRecordTime, { expires: 30 });     
             
             
@@ -104,9 +104,11 @@
             if(vConfirm!=true)
                 return;
 
-            $("#RecordList a").remove();
-            //$.removeCookie('larm_records_cookie'); //改成用刪除 cookie 方式，看看手機版本會不會避免 garbage 的紀錄
-            $.cookie('larm_records_cookie', null); 
+            $("#RecordList a").remove();       
+
+            //$.cookie('larm_records_cookie', null); 
+            //改成用 DeleteOneCookie()，看看是否還會有殘留 Cookie 的現象
+            DeleteOneCookie('larm_records_cookie');
         }
 
 
@@ -335,6 +337,15 @@
 
             //update cookie
             $.cookie('nan_LarmRead_cookie', vUserInput, { expires: 30 });            
+        }
+
+        function DeleteOneCookie(name)
+        {
+            var date = new Date();
+            date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+            document.cookie = name + "=" + expires + "; path=/";
+            document.cookie = name + "=" + expires + "; path=/LarmShare";
         }
 
         $(function () {
