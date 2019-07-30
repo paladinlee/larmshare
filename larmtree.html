@@ -27,6 +27,7 @@
     <![endif]-->
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/larmCategoryData.js"></script>
+    <!--<script src="./jquery/daData.js"></script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <title>廣論科判</title>      
@@ -62,7 +63,7 @@
             ]             
          }            
         ).on('loaded.jstree', function() {
-            $('#jstree_demo_div').jstree('open_all');
+            //$('#jstree_demo_div').jstree('open_all');
         })
         .bind("select_node.jstree",function(e, data){
             var href = data.node.a_attr.href;                     
@@ -74,6 +75,7 @@
     </script>
 </head>
 <body>
+    <a href="https://larms.azurewebsites.net/larmcategory.html">【切換回舊版】</a><br><br>
     <div class="container"  id="jstree_demo_div">
 
     </div>

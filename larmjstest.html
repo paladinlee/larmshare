@@ -26,7 +26,7 @@
     <script src="../Scripts/respond.min.js"></script>
     <![endif]-->
     <script src="./jquery/jquery.min.js"></script>
-    <script src="./jquery/larmCategoryData.js"></script>
+    <script src="./jquery/larmTestData.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <title>廣論科判</title>      
@@ -38,6 +38,7 @@
             { 'core' : {
                'data' : vLarmDaSource,               
                 "themes" : { "stripes" : true },
+                "check_callback" : true
              
             },
             "types" : {
@@ -64,16 +65,20 @@
             ]             
          }            
         ).on('loaded.jstree', function() {
-            $('#jstree_demo_div').jstree('open_all');
+            //$('#jstree_demo_div').jstree('open_all');
         })
         .on("changed.jstree", function (e, data) {
-            console.log(data.selected);
-        })      
-        /*  
+            console.log('changed',data.selected);
+            console.log('changed',data.selected);
+        })  
+        .bind("move_node.jstree", function (e, data) {
+           
+        })            
         .bind("select_node.jstree",function(e, data){
-            var href = data.node.a_attr.href;                     
-            window.open(href, '_blank');
-        })*/
+            //var href = data.node.a_attr.href;                     
+            //window.open(href, '_blank');
+            console.log('selected',data.selected);
+        })
         ;
         $('button').on('click', function () {
             $('#jstree_demo_div').jstree(true).select_node('child_node_1');
@@ -83,9 +88,16 @@
     
     });
 
+    function GetNodes()
+    {
+        var v = $('#jstree_demo_div').jstree(true).get_json('#', {flat:true})
+        var mytext = JSON.stringify(v);
+        console.log(mytext);
+    }
     </script>
 </head>
 <body>
+    <button onclick="GetNodes()">GetNowStatus</button>
     <div class="container"  id="jstree_demo_div">
 
     </div>
