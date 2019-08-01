@@ -81,19 +81,21 @@
 
             arrayRecordTime.push(vCurrentTime);
 
-            var vAppend = "<a class='append_a t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:SetTime(" + vCurrentTime.toFixed(2) + ")'>" + formatSecond(vCurrentTime) + "</a><a class='append_d t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:DoDelete(\"t_" + vCurrentTime.toString().replace(".", "_") + "\")' title='刪除'><span style='color:red' class='glyphicon glyphicon-trash'> </span></a>";
-            $("#RecordList").append(vAppend);
-            //console.log('curren time', audio.currentTime);
-            
-            console.log('Now arrayRecordTime:',arrayRecordTime)
+            //排序
+            arrayRecordTime.sort();
+        
 
             //update cookie
             $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
 
             $.cookie('larm_records_cookie', arrayRecordTime, { expires: 30 });     
             
-            
-            console.log('cookie',$.cookie('larm_records_cookie'));
+            //先清除畫面既有的紀錄
+            $("#RecordList a").remove();  
+             
+            //從 cookie 中重新繫結撥放紀錄
+            CookiesToPlayRecord();
+           
             
         }
 
@@ -118,10 +120,9 @@
             var vAppend = "<a class='append_a t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:SetTime(" + vCurrentTime.toFixed(2) + ")'>" + formatSecond(vCurrentTime) + "</a><a class='append_d t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:DoDelete(\"t_" + vCurrentTime.toString().replace(".", "_") + "\")' title='刪除'><span style='color:red' class='glyphicon glyphicon-trash'> </span></a>";
             $("#RecordList").append(vAppend);            
         }
-    
 
-        function CookieToRecord(){           
-
+        //將目前撥放紀錄的 cookie 內容繫結到畫面
+        function CookiesToPlayRecord(){
             if($.cookie('larm_records_cookie')!=undefined)
             {
                 var arrayCookie=new Array();
@@ -137,7 +138,13 @@
 
                     arrayRecordTime=arrayCookie;
                 }
-            }
+            }            
+        }
+
+        function CookieToRecord(){           
+
+            //將目前撥放紀錄的 cookie 內容繫結到畫面
+            CookiesToPlayRecord();
 
             //Refresh Target URL
             $("#tbxTargetURL").val($.cookie('larm_play_cookie'));     
