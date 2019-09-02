@@ -99,7 +99,7 @@
                 vNowPage=parseInt(vNowPage)-1;
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));        
-                $.cookie('da01_cookie', vNowPage, { expires: 30 });       
+                $.cookie('da01_cookie', vNowPage, { expires: 360 });       
                 window.opener.location.reload(false);                
             }
         }
@@ -111,7 +111,7 @@
                 vNowPage=parseInt(vNowPage)+1;
                 $.cookie('da01_cookie', vNowPage); 
                 $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));       
-                $.cookie('da01_cookie', vNowPage, { expires: 30 });    
+                $.cookie('da01_cookie', vNowPage, { expires: 360 });    
                 window.opener.location.reload(false);  
               
             }
