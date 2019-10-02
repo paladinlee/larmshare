@@ -1,4 +1,7 @@
 var arrayDailyLamID = [
+'157',
+'156',
+'155',        
 '154',
 '153',
 '152',        
@@ -154,6 +157,9 @@ var arrayDailyLamID = [
 '2',
 '1'];
 var arrayDailyLamFile = [
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0157.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0156.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0155.mp3',        
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0154.mp3',
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0153_V2.mp3',
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0152.mp3',        
@@ -311,6 +317,9 @@ var arrayDailyLamFile = [
 ];
 
 var arrayDailyLamUrl = [
+'https://www.blisswisdom.org/teachings/dailylamrim2/3159-130157',
+'https://www.blisswisdom.org/teachings/dailylamrim2/3158-130156',
+'https://www.blisswisdom.org/teachings/dailylamrim2/3157-130155',        
 'https://www.blisswisdom.org/teachings/dailylamrim2/3156-130154',
 'https://www.blisswisdom.org/teachings/dailylamrim2/3155-130153',
 'https://www.blisswisdom.org/teachings/dailylamrim2/3154-130152',        
