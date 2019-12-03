@@ -171,6 +171,11 @@
 
         }
 
+        function right(str, num)
+        {
+            return str.substring(str.length-num,str.length)
+        }
+
         function SetTime(vTime) {
             var audio = document.getElementById('MyAudio');
             audio.currentTime = vTime;
@@ -217,6 +222,13 @@
                 alert("請先輸入第幾冊!");
                 return false;
             }
+
+            if(parseInt(vBook)<100)
+            {
+                var vBookTmp='00'+vBook.toString();
+                vBook=right(vBookTmp,3);
+            }            
+
             var vLink = "https://theqi.com/buddhism/GL1/audio/" + vBook + vAB.toUpperCase() + ".MP3";
             $("#tbxTargetURL").val(vLink);
 
@@ -235,6 +247,13 @@
                 alert("請先輸入第幾冊!");
                 return false;
             }
+
+            if(parseInt(vBook)<100)
+            {
+                var vBookTmp='00'+vBook.toString();
+                vBook=right(vBookTmp,2);
+            }
+                        
             var vLink = "https://theqi.com/buddhism/GL1/data/s" + vBook + vAB.toLowerCase() + ".html";
             window.open(vLink, "_blank");
 

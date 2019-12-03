@@ -1,4 +1,11 @@
 var arrayDailyLamID = [
+'175',
+'174',
+'173',
+'172',
+'171',
+'170',
+'169',        
 '168',
 '167',
 '166',        
@@ -168,6 +175,13 @@ var arrayDailyLamID = [
 '2',
 '1'];
 var arrayDailyLamFile = [
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0175.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0174.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0173.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0172.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0171.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0170_V2.mp3',
+'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0169.mp3',        
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0168.mp3',
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0167.mp3',
 'https://d3v2d3f6zmz0pr.cloudfront.net/mp3/lr2/%E7%A6%8F%E6%99%BA%E5%85%A8%E7%90%83%E5%BB%A3%E8%AB%96%E7%AC%AC%E4%BA%8C%E8%BC%AA_0166.mp3',        
@@ -339,6 +353,13 @@ var arrayDailyLamFile = [
 ];
 
 var arrayDailyLamUrl = [
+'https://www.blisswisdom.org/teachings/dailylamrim2/4606-130175',
+'https://www.blisswisdom.org/teachings/dailylamrim2/4605-130174',
+'https://www.blisswisdom.org/teachings/dailylamrim2/4604-130173',
+'https://www.blisswisdom.org/teachings/dailylamrim2/4603-130172',
+'https://www.blisswisdom.org/teachings/dailylamrim2/4602-130171',
+'https://www.blisswisdom.org/teachings/dailylamrim2/3275-130170',
+'https://www.blisswisdom.org/teachings/dailylamrim2/3274-130169',        
 'https://www.blisswisdom.org/teachings/dailylamrim2/3273-130168',
 'https://www.blisswisdom.org/teachings/dailylamrim2/3272-130167',
 'https://www.blisswisdom.org/teachings/dailylamrim2/3271-130166',        
