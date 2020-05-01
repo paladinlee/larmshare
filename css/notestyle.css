@@ -1,0 +1,7 @@
+@media (max-width:400px), print{
+    h1{
+        font-size:100px;
+        color:red;
+    }
+}
+body{font-size:1rem}
