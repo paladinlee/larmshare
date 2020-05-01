@@ -1,10 +1,13 @@
 body{
-    font-size:1rem;
-    font-family:"Microsoft YaHei", "微软雅黑体", "Microsoft JhengHei", "微軟正黑體", Arial, Helvetica, sans-serif;
+    font-size:1rem;    
 }
 
+h1,h2,h3,h4,h5,h6{
+    font-family:"Microsoft YaHei", "微软雅黑体", "Microsoft JhengHei", "微軟正黑體", Arial, Helvetica, sans-serif;
+}
 p{
     font-size: 22px;
+    font-family:Helvetica, Heiti TC, Segoe UI, Meiryo, "微軟正黑體";
 }
 
 @media (max-width:400px), print{
