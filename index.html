@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +11,18 @@
     <meta name="author" content="">
     <link rel="icon" href="./img/favicon-mc.ico">
     <!-- 最新編譯和最佳化的 CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />    
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="./css/sticky-footer.css" rel="stylesheet" />            
-    
+    <link href="./css/sticky-footer.css" rel="stylesheet" />
+
     <link href="./css/starter-template.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="../Scripts/ie8-responsive-file-warning.js"></script>    
     <![endif]-->
     <script src="./Scripts/ie-emulation-modes-warning.js"></script>
-    
-    
+
+
     <!--[if lt IE 9]>
     <script src="../Scripts/html5shiv.min.js"></script>
     <script src="../Scripts/respond.min.js"></script>
@@ -29,19 +30,17 @@
 
     <style>
         .append_a {
-            padding-right:5px;
+            padding-right: 5px;
             padding-left: 15px;
         }
 
         .append_d {
-            padding-right:20px;
+            padding-right: 20px;
         }
 
         .row_multi {
             line-height: 50px !important;
         }
-    
-
     </style>
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
@@ -50,11 +49,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143327354-1"></script>
     <title>廣論小助理</title>
     <script>
-        var arrayRecordTime=new Array();
+        var arrayRecordTime = new Array();
         var vDailyLamID = arrayDailyLamID;
         var vDailyLamFile = arrayDailyLamFile;
-        function DoPaly()
-        {
+        function DoPaly() {
             var audio = document.getElementById("MyAudio");
             var source = document.getElementById('MySource');
 
@@ -82,98 +80,129 @@
             arrayRecordTime.push(vCurrentTime);
 
             //排序
-            arrayRecordTime.sort(function(a,b){
-                return a-b;
+            arrayRecordTime.sort(function (a, b) {
+                return a - b;
             });
-        
+
 
             //update cookie
             $.cookie('larm_records_cookie', null);   //通過傳遞null作為cookie的值即可
 
-            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 360 });     
-            
+            $.cookie('larm_records_cookie', arrayRecordTime, { expires: 360 });
+
+            //存 local storage
+            localStorage.setItem('record@' + $("input[id=tbxTargetURL]").val(), arrayRecordTime);
+
             //先清除畫面既有的紀錄
-            $("#RecordList a").remove();  
-             
+            $("#RecordList a").remove();
+
             //從 cookie 中重新繫結撥放紀錄
             CookiesToPlayRecord();
-           
-            
+
+
         }
 
-        function DoRemoveAllRecord()
-        {
+        function DoRemoveAllRecord() {
             //將 arrayRecordTime 陣列清空
-            arrayRecordTime=[];
+            arrayRecordTime = [];
 
-            vConfirm=confirm('是否確定要刪除所有已經記憶的時間?');
-            if(vConfirm!=true)
+            vConfirm = confirm('是否確定要刪除所有已經記憶的時間?');
+            if (vConfirm != true)
                 return;
 
-            $("#RecordList a").remove();       
+            $("#RecordList a").remove();
 
-            $.cookie('larm_records_cookie', null); 
+            $.cookie('larm_records_cookie', null);
+
+            //移除 local storage
+            localStorage.removeItem('record@' + $("input[id=tbxTargetURL]").val());
 
         }
 
 
-        function AppendTimePoint(vTime){
+        function AppendTimePoint(vTime) {
             var vCurrentTime = new Number(vTime);
             var vAppend = "<a class='append_a t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:SetTime(" + vCurrentTime.toFixed(2) + ")'>" + formatSecond(vCurrentTime) + "</a><a class='append_d t_" + vCurrentTime.toString().replace(".", "_") + "' href='javascript:DoDelete(\"t_" + vCurrentTime.toString().replace(".", "_") + "\")' title='刪除'><span style='color:red' class='glyphicon glyphicon-trash'> </span></a>";
-            $("#RecordList").append(vAppend);            
+            $("#RecordList").append(vAppend);
         }
 
         //將目前撥放紀錄的 cookie 內容繫結到畫面
-        function CookiesToPlayRecord(){
-            if($.cookie('larm_records_cookie')!=undefined)
-            {
-                var arrayCookie=new Array();
-                arrayCookie=$.cookie('larm_records_cookie').split(',');
+        function CookiesToPlayRecord() {
+            /*
+            if ($.cookie('larm_records_cookie') != undefined) {
+                var arrayCookie = new Array();
+                arrayCookie = $.cookie('larm_records_cookie').split(',');
 
-                if(arrayCookie[0]!= '' && arrayCookie[0]!= 'null')
-                {
-                    arrayCookie.forEach(function(vTime)
-                    {
+                if (arrayCookie[0] != '' && arrayCookie[0] != 'null') {
+                    arrayCookie.forEach(function (vTime) {
                         AppendTimePoint(vTime);
                     });
-                
 
-                    arrayRecordTime=arrayCookie;
+
+                    arrayRecordTime = arrayCookie;
                 }
-            }            
+            }*/
+
+            var vRecordLocalStorage = localStorage.getItem('record@' + $("input[id=tbxTargetURL]").val());
+            console.log('Get LocalStorage:', vRecordLocalStorage);
+
+            $("#RecordList a").remove();
+
+            if (vRecordLocalStorage != null) {
+                var arrayCookie = new Array();
+                arrayCookie = vRecordLocalStorage.split(',');
+                console.log('arrayCookie', arrayCookie);
+
+                if (arrayCookie[0] != '' && arrayCookie[0] != 'null') {
+                    arrayCookie.forEach(function (vTime) {
+                        AppendTimePoint(vTime);
+                    });
+
+
+                    arrayRecordTime = arrayCookie;
+                }
+            }
+            else {
+                console.log('it is null');
+                $("#RecordList a").remove();
+            }
+
+            console.log('load local storage', 'record@' + $("input[id=tbxTargetURL]").val(), localStorage.getItem('record@' + $("input[id=tbxTargetURL]").val()))
+            console.log('$("input[id=tbxTargetURL]").val():', $("input[id=tbxTargetURL]").val());
         }
 
-        function CookieToRecord(){           
+        function CookieToRecord() {
+
+            //Refresh Target URL
+            $("#tbxTargetURL").val($.cookie('larm_play_cookie'));
 
             //將目前撥放紀錄的 cookie 內容繫結到畫面
             CookiesToPlayRecord();
 
-            //Refresh Target URL
-            $("#tbxTargetURL").val($.cookie('larm_play_cookie'));     
-            
+
+
             //Refresh 廣論原文頁數
             $("#tbxPageNum").val($.cookie('larm_LarmRead_cookie'));
 
             //Refresh 備覽原文頁數
             $("tbxNanPageNum").val($.cookie('nan_LarmRead_cookie'));
-            
+
             //Refrsh 廣論手抄頁數
             $("#tbxBook").val($.cookie('larm_LarmNum_cookie'));
 
             //Refresh 廣論手抄AB
-            $("input[name=optradio][value='"+$.cookie('larm_LarmAB_cookie')+"']").prop("checked",true);
+            $("input[name=optradio][value='" + $.cookie('larm_LarmAB_cookie') + "']").prop("checked", true);
 
             //Refrsh 備覽手抄頁數
             $("#tbxNSLBook").val($.cookie('larm_NSLNum_cookie'));
 
             //Refresh 備覽手抄AB
-            $("input[name=NSLoptradio][value='"+$.cookie('larm_NSLAB_cookie')+"']").prop("checked",true);
+            $("input[name=NSLoptradio][value='" + $.cookie('larm_NSLAB_cookie') + "']").prop("checked", true);
 
         }
 
-        function right(str, num)
-        {
-            return str.substring(str.length-num,str.length)
+        function right(str, num) {
+            return str.substring(str.length - num, str.length)
         }
 
         function SetTime(vTime) {
@@ -193,8 +222,7 @@
 
         }
 
-        function DoDelete(vClass)
-        {
+        function DoDelete(vClass) {
             vConfirm = confirm('是否確定要刪除此紀錄?');
 
             if (!vConfirm)
@@ -202,32 +230,36 @@
 
             $("." + vClass).remove();
 
-            vOriTime=vClass.split('t_')[1].replace("_",".");
+            vOriTime = vClass.split('t_')[1].replace("_", ".");
 
-            console.log('arrayRecordTime delete before',arrayRecordTime);
-            arrayRecordTime.splice( arrayRecordTime.indexOf(vOriTime), 1 );        
-            console.log('arrayRecordTime delete after',arrayRecordTime);
-            
+            console.log('arrayRecordTime delete before', arrayRecordTime);
+            arrayRecordTime.splice(arrayRecordTime.indexOf(vOriTime), 1);
+            console.log('arrayRecordTime delete after', arrayRecordTime);
+
             //update cookie
             $.cookie('larm_records_cookie', arrayRecordTime, { expires: 360 });
+
+            //存 local storage
+            localStorage.setItem('record@' + $("input[id=tbxTargetURL]").val(), arrayRecordTime);            
         }
 
-        function DoLamAdd()
-        {
+        function DoLamAdd() {
+
+            //將 arrayRecordTime 陣列清空
+            arrayRecordTime = [];
+
             vBook = $("#tbxBook").val();
             vAB = $('input[name=optradio]:checked').val();
 
-            if (vBook == "")
-            {
+            if (vBook == "") {
                 alert("請先輸入第幾冊!");
                 return false;
             }
 
-            if(parseInt(vBook)<100)
-            {
-                var vBookTmp='00'+vBook.toString();
-                vBook=right(vBookTmp,3);
-            }            
+            if (parseInt(vBook) < 100) {
+                var vBookTmp = '00' + vBook.toString();
+                vBook = right(vBookTmp, 3);
+            }
 
             var vLink = "https://theqi.com/buddhism/GL1/audio/" + vBook + vAB.toUpperCase() + ".MP3";
             $("#tbxTargetURL").val(vLink);
@@ -237,6 +269,9 @@
 
             $.cookie('larm_LarmNum_cookie', vBook, { expires: 360 });
             $.cookie('larm_LarmAB_cookie', vAB, { expires: 360 });
+
+            //將 local storage 撥放紀錄的 cookie 內容繫結到畫面
+            CookiesToPlayRecord();
         }
 
         function DoLamRead() {
@@ -248,12 +283,11 @@
                 return false;
             }
 
-            if(parseInt(vBook)<100)
-            {
-                var vBookTmp='00'+vBook.toString();
-                vBook=right(vBookTmp,2);
+            if (parseInt(vBook) < 100) {
+                var vBookTmp = '00' + vBook.toString();
+                vBook = right(vBookTmp, 2);
             }
-                        
+
             var vLink = "https://theqi.com/buddhism/GL1/data/s" + vBook + vAB.toLowerCase() + ".html";
             window.open(vLink, "_blank");
 
@@ -262,9 +296,12 @@
             $.cookie('larm_LarmAB_cookie', vAB, { expires: 360 });
         }
 
-        function DoNSLAdd()
-        {
-            vOriBook = '0'+$("#tbxNSLBook").val();
+        function DoNSLAdd() {
+
+            //將 arrayRecordTime 陣列清空
+            arrayRecordTime = [];
+
+            vOriBook = '0' + $("#tbxNSLBook").val();
 
 
             vBook = vOriBook.substr(vOriBook.length - 2, 2);
@@ -278,13 +315,15 @@
             $("#tbxTargetURL").val(vLink);
 
             //update cookie
-            $.cookie('larm_play_cookie', vLink, { expires: 360 });        
+            $.cookie('larm_play_cookie', vLink, { expires: 360 });
             $.cookie('larm_NSLNum_cookie', vBook, { expires: 360 });
-            $.cookie('larm_NSLAB_cookie', vAB, { expires: 360 });                
+            $.cookie('larm_NSLAB_cookie', vAB, { expires: 360 });
+
+            //將 local storage 撥放紀錄的 cookie 內容繫結到畫面
+            CookiesToPlayRecord();
         }
 
-        function DoNSLRead()
-        {
+        function DoNSLRead() {
             vOriBook = '0' + $("#tbxNSLBook").val();
 
 
@@ -300,37 +339,38 @@
 
             //update cookie
             $.cookie('larm_NSLNum_cookie', vBook, { expires: 360 });
-            $.cookie('larm_NSLAB_cookie', vAB, { expires: 360 });                
+            $.cookie('larm_NSLAB_cookie', vAB, { expires: 360 });
         }
 
-        function DoDailyAdd()
-        {
-            var vLink = $("select option:selected").val();            
+        function DoDailyAdd() {
+
+            //將 arrayRecordTime 陣列清空
+            arrayRecordTime = [];
+
+            var vLink = $("select option:selected").val();
             $("#tbxTargetURL").val(vLink);
 
             //update cookie
             $.cookie('larm_play_cookie', vLink, { expires: 360 });
 
             $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 360 });
-            
 
+            //將 local storage 撥放紀錄的 cookie 內容繫結到畫面
+            CookiesToPlayRecord();
         }
 
-        function DoDailyRead()
-        {
-            var vID = $("select option:selected").text();     
-            var vURL=dict_url[vID];
+        function DoDailyRead() {
+            var vID = $("select option:selected").text();
+            var vURL = dict_url[vID];
             window.open(vURL, "_blank");
 
             //update cookie
             $.cookie('larm_DailySelected_cookie', $("select option:selected").text(), { expires: 360 });
-        }        
+        }
 
-        function DoLarmRead()
-        {
-            var vUserInput=$.trim($("#tbxPageNum").val());
-            if(isNaN(vUserInput))
-            {
+        function DoLarmRead() {
+            var vUserInput = $.trim($("#tbxPageNum").val());
+            if (isNaN(vUserInput)) {
                 alert('請輸入正確的頁數');
                 return;
             }
@@ -341,247 +381,254 @@
             var vTmp="0000"+iPageNum.toString();
             var vPage="https://raw.githubusercontent.com/paladinlee/larmimg/master/page"+vTmp.substr(vTmp.length-4,4)+".jpg";
             */
-            var vPage="larmbook.html?num="+vUserInput;
+            var vPage = "larmbook.html?num=" + vUserInput;
 
-            window.open(vPage,"_blank");
+            window.open(vPage, "_blank");
 
 
             //update cookie
             $.cookie('larm_LarmRead_cookie', vUserInput, { expires: 360 });
         }
 
-        function DoNanRead()
-        {
-            var vUserInput=$.trim($("#tbxNanPageNum").val());
-            if(isNaN(vUserInput))
-            {
+        function DoNanRead() {
+            var vUserInput = $.trim($("#tbxNanPageNum").val());
+            if (isNaN(vUserInput)) {
                 alert('請輸入正確的頁數');
                 return;
             }
 
-            var vPage="nanbook.html?num="+vUserInput;
+            var vPage = "nanbook.html?num=" + vUserInput;
 
-            window.open(vPage,"_blank");
+            window.open(vPage, "_blank");
 
 
             //update cookie
-            $.cookie('nan_LarmRead_cookie', vUserInput, { expires: 360 });            
+            $.cookie('nan_LarmRead_cookie', vUserInput, { expires: 360 });
         }
 
 
 
         $(function () {
-            for (var i = 0; i < vDailyLamID.length; i++)
-            {
-                if(vDailyLamID[i]==$.cookie('larm_DailySelected_cookie'))
-                {
+            for (var i = 0; i < vDailyLamID.length; i++) {
+                if (vDailyLamID[i] == $.cookie('larm_DailySelected_cookie')) {
                     $("#sel1").append($("<option selected></option>").attr("value", vDailyLamFile[i]).text(vDailyLamID[i]));
                 }
-                else
-                {
+                else {
                     $("#sel1").append($("<option></option>").attr("value", vDailyLamFile[i]).text(vDailyLamID[i]));
                 }
             }
-            
+
+
             CookieToRecord();
 
         });
 
         //google GA
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'UA-143327354-1');        
     </script>
 </head>
+
 <body>
     <form id="form1" runat="server">
-    <div class="container">  
-    <div class="row row_query">
-    <script>
-      (function() {
-        var cx = '002047481276774726341:uqalit40df4';
-        var gcse = document.createElement('script');
-        gcse.type = 'text/javascript';
-        gcse.async = true;
-        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(gcse, s);
-      })();
-    </script>
-    <gcse:search></gcse:search>
-    </div>  
+        <div class="container">
+            <div class="row row_query">
+                <script>
+                    (function () {
+                        var cx = '002047481276774726341:uqalit40df4';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                    })();
+                </script>
+                <gcse:search></gcse:search>
+            </div>
 
-    <div class="row row_multi">
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-addon">【廣論】冊</span>
-                <input type="text" id="tbxBook" class="form-control" />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-addon">AB</span>
-                    <span class="form-control">
-                      <label><input type="radio" name="optradio" value="A" checked >A</label>                   
-                      <label><input type="radio" name="optradio" value="B">B</label>
-                   </span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <div >
-                    <input type="button" value="加入" id="btnLamAdd" class="btn btn-primary " onclick="DoLamAdd()"  /> 
-                    <input type="button" value="閱讀" id="btnRead" class="btn btn-primary " onclick="DoLamRead()"  /> 
+            <div class="row row_multi">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">【廣論】冊</span>
+                        <input type="text" id="tbxBook" class="form-control" />
+                    </div>
                 </div>
-                   
-            </div>
-        </div>
-    </div>        
-        <br />
-<div class="row row_multi">
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-addon">【備覽】冊</span>
-                <input type="text" id="tbxNSLBook" class="form-control" />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-addon">AB</span>
-                    <span class="form-control">
-                      <label><input type="radio" name="NSLoptradio" value="A" checked >A</label>                   
-                      <label><input type="radio" name="NSLoptradio" value="B">B</label>
-                   </span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <span >
-                    <input type="button" value="加入" id="btnNSLAdd" class="btn btn-primary " onclick="DoNSLAdd()"  /> 
-                    <input type="button" value="閱讀" id="btnNSLRead" class="btn btn-primary " onclick="DoNSLRead()"  /> 
-                </span>
-                   
-            </div>
-        </div>
-    </div>            
-        <br />
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">AB</span>
+                        <span class="form-control">
+                            <label><input type="radio" name="optradio" value="A" checked>A</label>
+                            <label><input type="radio" name="optradio" value="B">B</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <div>
+                            <input type="button" value="加入" id="btnLamAdd" class="btn btn-primary "
+                                onclick="DoLamAdd()" />
+                            <input type="button" value="閱讀" id="btnRead" class="btn btn-primary "
+                                onclick="DoLamRead()" />
+                        </div>
 
-    <div class="row row_multi">
-       <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-addon">全廣 II</span>
-              <select class="form-control" id="sel1">               
-              </select>
-            </div> 
-       </div>
-        <div class="col-md-6">
-            <div class="input-group">
-                <span >
-                    <input type="button" value="加入" id="btnDailyAdd" class="btn btn-primary" onclick="DoDailyAdd()"  />  
-                    <input type="button" value="閱讀" id="btnDailyRead" class="btn btn-primary" onclick="DoDailyRead()"  />                    
-                </span>
-                
-                   
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-        <br />
-        <div class="row row_multi">
-            <div class="col-md-6">
-                 <div class="input-group">
-                   <span class="input-group-addon">廣論頁數</span>
-                   <input type="text" id="tbxPageNum" class="form-control">        
-                   </select>
-                 </div> 
-            </div>
-             <div class="col-md-6">
-                 <div class="input-group">                        
-                     <span >
-                         
-                         <input type="button" value="閱讀" id="btnLarmRead" class="btn btn-primary " onclick="DoLarmRead()"  />                     
-                     </span>
-                     
-                        
-                 </div>
-             </div>
-         </div>    
-        <br />
-        <div class="row row_multi">
-            <div class="col-md-6">
-                 <div class="input-group">
-                   <span class="input-group-addon">備覽頁數</span>
-                   <input type="text" id="tbxNanPageNum" class="form-control">        
-                   </select>
-                 </div> 
-            </div>
-             <div class="col-md-6">
-                 <div class="input-group">                        
-                     <span >
-                         
-                         <input type="button" value="閱讀" id="btnNanRead" class="btn btn-primary " onclick="DoNanRead()"  />                     
-                     </span>
-                     
-                        
-                 </div>
-             </div>
-         </div>   
-         <br/>        
-    <div class="row">
-        <div class="col-md-12">
-             <div class="input-group">
-                 <span class="input-group-addon"><span style="color:red">*</span>音檔來源</span>
-                 <input type="text" id="tbxTargetURL" class="form-control" />                                 
-             </div>
-        </div>
-    </div>
-        <br />
-    <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
-        <input type="button" value="下載" id="btnPlay" class="btn btn-primary" onclick="DoPaly()"  />        
-    </div>
-    <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
-        <input type="button" value="記憶" id="btnRecord" class="btn btn-danger" onclick="DoRecord()"  />        
-    </div>
-    <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
-        <input type="button" value="全刪" id="btnRemoveAll" class="btn btn-danger" onclick="DoRemoveAllRecord()"  />        
-    </div>    
-    <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">        
-        <span id="RecordList"></span>       
-    </div>
-    <div class="row row_multi">
-        <div class="col-md-12">
-            <audio id="MyAudio" controls class="form-control input-lg">              
-              <source id="MySource" src="" type="audio/mpeg">
-            Your browser does not support the audio element.
-            </audio>            
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="row row_multi">
-            <div class="col-md-3">
-               <a href="https://paladinlee.gitbook.io/larms/" target="_blank">【使用說明】</a>          
-            </div>
-            <div class="col-md-3">
-                <a href="https://larms.azurewebsites.net/larmtree.html" target="_blank">【廣論科判】</a>          
-            </div>            
-            <div class="col-md-3">
-                <a href="https://larms.azurewebsites.net/nancategory.html" target="_blank">【備覽科判】</a>          
-            </div>     
-            <div class="col-md-3">
-                <a href="https://larms.azurewebsites.net/da.html" target="_blank">【大般若經】</a>          
-            </div>          
-            <div class="col-md-3">
-                <a href="https://larms.azurewebsites.net/F35.html" target="_blank">【三十五佛】</a>          
-            </div>                                    
-        </div>    
-   
-  
-       
-       
+            <br />
+            <div class="row row_multi">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">【備覽】冊</span>
+                        <input type="text" id="tbxNSLBook" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">AB</span>
+                        <span class="form-control">
+                            <label><input type="radio" name="NSLoptradio" value="A" checked>A</label>
+                            <label><input type="radio" name="NSLoptradio" value="B">B</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span>
+                            <input type="button" value="加入" id="btnNSLAdd" class="btn btn-primary "
+                                onclick="DoNSLAdd()" />
+                            <input type="button" value="閱讀" id="btnNSLRead" class="btn btn-primary "
+                                onclick="DoNSLRead()" />
+                        </span>
 
-        
-    </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row row_multi">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">全廣 II</span>
+                        <select class="form-control" id="sel1">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span>
+                            <input type="button" value="加入" id="btnDailyAdd" class="btn btn-primary"
+                                onclick="DoDailyAdd()" />
+                            <input type="button" value="閱讀" id="btnDailyRead" class="btn btn-primary"
+                                onclick="DoDailyRead()" />
+                        </span>
+
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row row_multi">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">廣論頁數</span>
+                        <input type="text" id="tbxPageNum" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span>
+
+                            <input type="button" value="閱讀" id="btnLarmRead" class="btn btn-primary "
+                                onclick="DoLarmRead()" />
+                        </span>
+
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row row_multi">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">備覽頁數</span>
+                        <input type="text" id="tbxNanPageNum" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span>
+
+                            <input type="button" value="閱讀" id="btnNanRead" class="btn btn-primary "
+                                onclick="DoNanRead()" />
+                        </span>
+
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span style="color:red">*</span>音檔來源</span>
+                        <input type="text" id="tbxTargetURL" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">
+                <input type="button" value="下載" id="btnPlay" class="btn btn-primary" onclick="DoPaly()" />
+            </div>
+            <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">
+                <input type="button" value="記憶" id="btnRecord" class="btn btn-danger" onclick="DoRecord()" />
+            </div>
+            <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">
+                <input type="button" value="全刪" id="btnRemoveAll" class="btn btn-danger"
+                    onclick="DoRemoveAllRecord()" />
+            </div>
+            <div class="btn-group" role="group" arial-label="..." style="padding-bottom:5px;">
+                <span id="RecordList"></span>
+            </div>
+            <div class="row row_multi">
+                <div class="col-md-12">
+                    <audio id="MyAudio" controls class="form-control input-lg">
+                        <source id="MySource" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row row_multi">
+                <div class="col-md-3">
+                    <a href="https://paladinlee.gitbook.io/larms/" target="_blank">【使用說明】</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://larms.azurewebsites.net/larmtree.html" target="_blank">【廣論科判】</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://larms.azurewebsites.net/nancategory.html" target="_blank">【備覽科判】</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://larms.azurewebsites.net/da.html" target="_blank">【大般若經】</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://larms.azurewebsites.net/F35.html" target="_blank">【三十五佛】</a>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
     </form>
 </body>
+
 </html>
