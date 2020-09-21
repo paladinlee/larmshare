@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +11,18 @@
     <meta name="author" content="">
     <link rel="icon" href="./img/favicon-mc.ico">
     <!-- 最新編譯和最佳化的 CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />    
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="./css/sticky-footer.css" rel="stylesheet" />            
-    
+    <link href="./css/sticky-footer.css" rel="stylesheet" />
+
     <link href="./css/starter-template.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="../Scripts/ie8-responsive-file-warning.js"></script>    
     <![endif]-->
     <script src="./Scripts/ie-emulation-modes-warning.js"></script>
-    
-    
+
+
     <!--[if lt IE 9]>
     <script src="../Scripts/html5shiv.min.js"></script>
     <script src="../Scripts/respond.min.js"></script>
@@ -29,50 +30,47 @@
 
     <style>
         .append_a {
-            padding-right:5px;
+            padding-right: 5px;
             padding-left: 15px;
         }
 
         .append_d {
-            padding-right:20px;
+            padding-right: 20px;
         }
 
-        #imgBook{
+        #imgBook {
             margin-top: -90px;
-            
+
         }
 
-        .input-group-btn, .input-group .form-control
-        {
-        height: auto;
-        min-height: 46px;
+        .input-group-btn,
+        .input-group .form-control {
+            height: auto;
+            min-height: 46px;
         }
 
         #tbxJumpNum {
             width: 60px;
         }
 
-        .functionbar{
-            position:absolute;
+        .functionbar {
+            position: absolute;
             z-index: 10;
-            /*width: 100%;*/            
+            /*width: 100%;*/
         }
 
-        .spFunction
-        {
-            background-color:darkgrey;
+        .spFunction {
+            background-color: darkgrey;
             padding: 15px;
             font-weight: bold;
         }
 
-        .pic{
-            position:absolute;
+        .pic {
+            position: absolute;
             z-index: 1;
         }
-
-
-
     </style>
+    <script src="./Scripts/keypressFunction.js"></script>
     <script src="./jquery/jquery.min.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
     <script src="./jquery/jquery.url.js"></script>
@@ -81,79 +79,68 @@
 
     <title>大般若經第二會第四冊</title>
     <script>
-        var vNowPage=1958;
-        function GetBookUrlFromNum(vUserInput)
-        {
-            var iNum=parseInt(vUserInput);
-            var iPageNum=iNum-1952;
-            var vTmp="000"+iPageNum.toString();
-            var vPage="https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A-"+vTmp.substr(vTmp.length-3,3)+".jpg";
+        var vNowPage = 1958;
+        function GetBookUrlFromNum(vUserInput) {
+            var iNum = parseInt(vUserInput);
+            var iPageNum = iNum - 1952;
+            var vTmp = "000" + iPageNum.toString();
+            var vPage = "https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A-" + vTmp.substr(vTmp.length - 3, 3) + ".jpg";
             return vPage;
         }
-    
-        function DoPre()
-        {
-            if(vNowPage>1)
-            {
-                vNowPage=parseInt(vNowPage)-1;
-                $.cookie('da04_cookie', vNowPage); 
-                $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));        
-                $.cookie('da04_cookie', vNowPage, { expires: 360 });       
-                window.opener.location.reload(false);    
-            }
-        }
 
-        function DoNext()
-        {
-            console.log('vNowPage:',vNowPage);
-
-            if(vNowPage<=2594)
-            {
-                vNowPage=parseInt(vNowPage)+1;
-                $.cookie('da04_cookie', vNowPage); 
-                $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));       
-                $.cookie('da04_cookie', vNowPage, { expires: 360 });    
+        function DoPre() {
+            if (vNowPage > 1) {
+                vNowPage = parseInt(vNowPage) - 1;
+                $.cookie('da04_cookie', vNowPage);
+                $("#imgBook").attr("src", GetBookUrlFromNum(vNowPage));
+                $.cookie('da04_cookie', vNowPage, { expires: 360 });
                 window.opener.location.reload(false);
-                
             }
         }
 
-        function DoJump()
-        {            
-            var vUserInput=$.trim($("#tbxJumpNum").val());
+        function DoNext() {
+            console.log('vNowPage:', vNowPage);
 
-            
-            if(isNaN(vUserInput))
-            {
+            if (vNowPage <= 2594) {
+                vNowPage = parseInt(vNowPage) + 1;
+                $.cookie('da04_cookie', vNowPage);
+                $("#imgBook").attr("src", GetBookUrlFromNum(vNowPage));
+                $.cookie('da04_cookie', vNowPage, { expires: 360 });
+                window.opener.location.reload(false);
+
+            }
+        }
+
+        function DoJump() {
+            var vUserInput = $.trim($("#tbxJumpNum").val());
+
+
+            if (isNaN(vUserInput)) {
                 alert('請輸入正確的頁數');
                 return;
             }
 
-            vNowPage=parseInt(vUserInput);                             
+            vNowPage = parseInt(vUserInput);
 
-            $("#imgBook").attr("src",GetBookUrlFromNum(vNowPage));  
+            $("#imgBook").attr("src", GetBookUrlFromNum(vNowPage));
 
             MakeHyBack();
         }
 
-        function MakeHyBack()
-        {            
-            if($.cookie('da04_cookie')==null)
-            {
+        function MakeHyBack() {
+            if ($.cookie('da04_cookie') == null) {
                 $("#hyBack").html("");
             }
-            else
-            {
-                $("#hyBack").html("《返回 "+$.cookie('da04_cookie')+" 頁》");               
+            else {
+                $("#hyBack").html("《返回 " + $.cookie('da04_cookie') + " 頁》");
 
-                $("#hyBack").click(function(){                    
-                    $("#imgBook").attr("src",GetBookUrlFromNum($.cookie('da04_cookie')));
-                    vNowPage=parseInt($.cookie('da04_cookie'));  
+                $("#hyBack").click(function () {
+                    $("#imgBook").attr("src", GetBookUrlFromNum($.cookie('da04_cookie')));
+                    vNowPage = parseInt($.cookie('da04_cookie'));
 
-                    if($.cookie('da04_cookie').toString()==vNowPage.toString())
-                    {
+                    if ($.cookie('da04_cookie').toString() == vNowPage.toString()) {
                         $("#hyBack").html("");
-                    }                    
+                    }
                 });
 
 
@@ -161,62 +148,72 @@
 
         }
 
-        $(function(){
+        $(function () {
             //show back link
             MakeHyBack();
 
-            var vBookNum= $.url.param("num");           
-            if(vBookNum!='')
-            {                
-                vNowPage=vBookNum;                
-                $("#imgBook").attr("src",GetBookUrlFromNum(vBookNum));                
+            var vBookNum = $.url.param("num");
+            if (vBookNum != '') {
+                vNowPage = vBookNum;
+                $("#imgBook").attr("src", GetBookUrlFromNum(vBookNum));
             }
-            else
-            {
+            else {
                 //vNowPage=0;                
-                $("#imgBook").attr("src","https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A-001.jpg");                
+                $("#imgBook").attr("src", "https://github.com/paladinlee/daborejing/raw/master/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A/%E5%A4%A7%E8%88%AC%E8%8B%A5%E7%B6%93%E7%AC%AC%E4%BA%8C%E6%9C%83_%E7%AC%AC%E5%9B%9B%E5%86%8A-001.jpg");
             }
 
-            $(".spFunction").delay(1200).fadeIn( 400 );
+            $(".spFunction").delay(1200).fadeIn(400);
 
 
         });
         //google GA
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'UA-143327354-1');           
     </script>
 </head>
+
 <body>
     <form id="form1" runat="server">
-    <div class="container">     
-        <div class="btn-toolbar mb-12 functionbar " role="toolbar">
+        <div class="container">
+            <div class="btn-toolbar mb-12 functionbar " role="toolbar">
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                    <div class="input-group">                        
-                        <input class="input-group-text form-control" type="text" id="tbxJumpNum" >
+                    <div class="input-group">
+                        <input class="input-group-text form-control" type="text" id="tbxJumpNum">
                     </div>
-                        <button id="btnNext" type="button" class="btn btn-primary btn-lg" onclick="DoJump()" >跳頁</button>
-                    
-                </div>               
+                    <button id="btnNext" type="button" class="btn btn-primary btn-lg" onclick="DoJump()">跳頁</button>
+
+                </div>
                 <div class="btn-group " role="group" aria-label="Third group"><a href="#" id="hyBack"></a></div>
-                       
-               
-                  
-        </div>      
-        <div class="row pic">
+
+
+
+            </div>
+            <div class="row pic">
                 <table>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 40px">&nbsp;</td>
-                                <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoNext()">下<br><br><br>一<br><br><br>頁</div> </td>
-                                <td><div class="divBook"><img id="imgBook" src=""></div> </td>
-                                <td ><div class="spFunction" style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none" onclick="DoPre()">上<br><br><br>一<br><br><br>頁</div></td>
-                                <td style="padding: 40px">&nbsp;</td>
-                            </tr>
-                        </tbody>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 40px">&nbsp;</td>
+                            <td>
+                                <div class="spFunction"
+                                    style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none"
+                                    onclick="DoNext()">下<br><br><br>一<br><br><br>頁</div>
+                            </td>
+                            <td>
+                                <div class="divBook"><img id="imgBook" src=""></div>
+                            </td>
+                            <td>
+                                <div class="spFunction"
+                                    style="cursor:pointer; font-size: 30px; height: 50%; font-weight: bold; display: none"
+                                    onclick="DoPre()">上<br><br><br>一<br><br><br>頁</div>
+                            </td>
+                            <td style="padding: 40px">&nbsp;</td>
+                        </tr>
+                    </tbody>
                 </table>
-        </div>            
+            </div>
     </form>
 </body>
+
 </html>
