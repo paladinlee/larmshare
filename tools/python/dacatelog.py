@@ -8,7 +8,7 @@ class da:
     def mk(self):
         vTmpName=self.bookName+'　　　　　　　　'
         
-        vResult='{{ "id" : "book{}", "parent" : "a_5", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"https://larms.azurewebsites.net/da05.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
+        vResult='{{ "id" : "book{}", "parent" : "a_5", "text" : "{}{} (p{})","icon":"glyphicon glyphicon-book","a_attr":{{"href":"da05.html?num={}"}} }},'.format(self.bookNum,vTmpName[:8],self.title,self.page,self.page)
         return vResult
 
 pList=[]
