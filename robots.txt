@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: http://larms.azurewebsites.net/sitemap.xml
+Sitemap: http://larm.eastus.cloudapp.azure.com/sitemap.xml
